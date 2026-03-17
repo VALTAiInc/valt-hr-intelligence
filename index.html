@@ -3,8 +3,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>VALT HR Intelligence</title>
+<meta name="description" content="VALT HR Intelligence Platform" />
+<meta name="theme-color" content="#FE7725" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="VALT HR" />
+<meta name="mobile-web-app-capable" content="yes" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
@@ -1495,6 +1501,44 @@ renderPolicies(DEMO_POLICIES);
 renderLegalCategories();
 renderLegalRefs(LEGAL_REFS);
 loadCases();
+
+// ─── PWA Install ──────────────────────────────────────────────────────────────
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'flex';
+});
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+      document.getElementById('install-banner').style.display = 'none';
+    });
+  }
+}
+function dismissInstall() {
+  document.getElementById('install-banner').style.display = 'none';
+}
+if ('serviceWorker' in navigator) {
+  const swCode = `
+    const CACHE = 'valt-hr-v1';
+    self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(['/valt-hr-intelligence/']))));
+    self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+  `;
+  const blob = new Blob([swCode], {type:'application/javascript'});
+  navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(()=>{});
+}
 </script>
+<div id="install-banner" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1C1F2B;border:1px solid rgba(254,119,37,0.4);border-radius:14px;padding:14px 18px;gap:14px;align-items:center;z-index:9999;max-width:340px;width:calc(100% - 48px);box-shadow:0 8px 32px rgba(0,0,0,0.5);">
+  <div style="width:38px;height:38px;background:#FE7725;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;color:#fff;flex-shrink:0;">V</div>
+  <div style="flex:1;"><div style="font-size:13px;font-weight:600;color:#F0F1F4;margin-bottom:2px;">Add to Home Screen</div><div style="font-size:11px;color:#5C6275;">Install VALT HR as an app</div></div>
+  <div style="display:flex;gap:8px;flex-shrink:0;">
+    <button onclick="dismissInstall()" style="background:none;border:1px solid rgba(255,255,255,0.12);color:#9399A8;font-size:12px;padding:6px 10px;border-radius:7px;cursor:pointer;">Later</button>
+    <button onclick="installApp()" style="background:#FE7725;border:none;color:#fff;font-size:12px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;">Install</button>
+  </div>
+</div>
 </body>
 </html>
+
