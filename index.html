@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VALT HR Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  :root {
+    --bg: #08090C;
+    --surface: #0F1117;
+    --surface2: #161820;
+    --surface3: #1C1F2B;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #F0F1F4;
+    --text2: #9399A8;
+    --text3: #5C6275;
+    --accent: #FE7725;
+    --accent2: #FF9F5A;
+    --accent-dim: rgba(254,119,37,0.12);
+    --accent-glow: rgba(254,119,37,0.25);
+    --teal: #2DD4BF;
+    --teal-dim: rgba(45,212,191,0.1);
+    --red: #F87171;
+    --red-dim: rgba(248,113,113,0.1);
+    --green: #4ADE80;
+    --green-dim: rgba(74,222,128,0.1);
+    --amber: #FBBF24;
+    --amber-dim: rgba(251,191,36,0.1);
+    --radius: 10px;
+    --radius-lg: 14px;
+    --font: 'DM Sans', sans-serif;
+    --font-display: 'Syne', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --sidebar: 240px;
+    --transition: 180ms ease;
+  }
+ 
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+ 
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: var(--sidebar);
+    min-height: 100vh;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    z-index: 100;
+    transition: transform var(--transition);
+  }
+ 
+  .sidebar-logo {
+    padding: 20px 18px 18px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sidebar-logo .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-icon {
+    width: 30px; height: 30px;
+    background: var(--accent);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 13px; font-weight: 800;
+    color: #fff;
+    letter-spacing: -0.5px;
+  }
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.2px;
+  }
+  .logo-sub {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+ 
+  .sidebar-nav {
+    flex: 1;
+    padding: 12px 10px;
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text3);
+    padding: 12px 8px 6px;
+    font-weight: 500;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    transition: background var(--transition), color var(--transition);
+    position: relative;
+  }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { background: var(--accent-dim); color: var(--accent); }
+  .nav-item.active .nav-icon { color: var(--accent); }
+  .nav-icon { font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+  .nav-badge {
+    margin-left: auto;
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 10px;
+    min-width: 18px;
+    text-align: center;
+  }
+ 
+  .sidebar-bottom {
+    padding: 12px 10px;
+    border-top: 1px solid var(--border);
+  }
+  .user-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: 8px;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .user-row:hover { background: var(--surface2); }
+  .user-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), #b95510);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .user-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .user-role { font-size: 10px; color: var(--text3); }
+ 
+  /* ── MAIN ── */
+  .main {
+    margin-left: var(--sidebar);
+    flex: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+ 
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(8,9,12,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 56px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .topbar-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+    flex: 1;
+  }
+  .topbar-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .topbar-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .topbar-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .topbar-btn.primary:hover { background: var(--accent2); }
+ 
+  .content { padding: 24px; flex: 1; }
+ 
+  /* ── VIEWS (shown/hidden) ── */
+  .view { display: none; }
+  .view.active { display: block; }
+ 
+  /* ── ASK HR / CHAT VIEW ── */
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 56px - 48px);
+    max-height: 820px;
+  }
+  .chat-mode-bar {
+    display: flex; gap: 6px; margin-bottom: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 4px;
+    border-radius: 10px;
+    width: fit-content;
+  }
+  .chat-mode-btn {
+    padding: 5px 14px;
+    border-radius: 7px;
+    border: none;
+    background: none;
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .chat-mode-btn.active {
+    background: var(--accent);
+    color: #fff;
+  }
+ 
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 4px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface3) transparent;
+  }
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+ 
+  .msg {
+    display: flex;
+    gap: 12px;
+    animation: fadeUp 0.25s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .msg-avatar.ai { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-glow); font-family: var(--font-display); font-size: 11px; }
+  .msg-avatar.user { background: var(--surface3); color: var(--text2); font-size: 11px; }
+  .msg-bubble {
+    max-width: 72%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .msg.user .msg-bubble {
+    background: var(--accent-dim);
+    border-color: var(--accent-glow);
+  }
+  .msg-bubble p { margin-bottom: 8px; }
+  .msg-bubble p:last-child { margin-bottom: 0; }
+  .msg-bubble strong { color: var(--accent2); font-weight: 600; }
+  .msg-bubble .tag {
+    display: inline-block;
+    background: var(--teal-dim);
+    color: var(--teal);
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin: 2px 2px 2px 0;
+    font-family: var(--font-mono);
+  }
+  .msg-meta { font-size: 11px; color: var(--text3); margin-top: 6px; }
+ 
+  .msg-disclaimer {
+    font-size: 11px;
+    color: var(--text3);
+    background: var(--amber-dim);
+    border: 1px solid rgba(251,191,36,0.15);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+ 
+  .chat-input-area {
+    margin-top: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+  .chat-input-area:focus-within { border-color: var(--accent-glow); }
+  .chat-input-row {
+    display: flex; align-items: flex-end; gap: 0;
+  }
+  #chat-input {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13.5px;
+    padding: 13px 14px;
+    resize: none;
+    min-height: 46px;
+    max-height: 120px;
+    line-height: 1.5;
+  }
+  #chat-input::placeholder { color: var(--text3); }
+  .chat-send-btn {
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    width: 38px; height: 38px;
+    margin: 4px 4px 4px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background var(--transition), transform var(--transition);
+    flex-shrink: 0;
+  }
+  .chat-send-btn:hover { background: var(--accent2); }
+  .chat-send-btn:active { transform: scale(0.94); }
+  .chat-input-footer {
+    padding: 6px 12px 8px;
+    display: flex; align-items: center; gap: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .chat-mode-tag {
+    font-size: 11px;
+    color: var(--text3);
+    background: var(--surface2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+  }
+  .chat-hint { font-size: 11px; color: var(--text3); margin-left: auto; }
+ 
+  /* ── CASES VIEW ── */
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .case-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    cursor: pointer;
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .case-card:hover { border-color: var(--border2); transform: translateY(-1px); }
+  .case-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+  .case-id { font-family: var(--font-mono); font-size: 11px; color: var(--text3); }
+  .case-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .case-desc { font-size: 12.5px; color: var(--text2); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .case-footer { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .status-pill {
+    font-size: 10px; font-weight: 600;
+    padding: 3px 8px; border-radius: 20px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .status-open { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+  .status-review { background: var(--teal-dim); color: var(--teal); border: 1px solid rgba(45,212,191,0.2); }
+  .status-closed { background: var(--surface2); color: var(--text3); border: 1px solid var(--border); }
+  .status-urgent { background: var(--red-dim); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+  .priority-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+  .case-meta { font-size: 11px; color: var(--text3); margin-left: auto; }
+  .case-category {
+    font-size: 11px; color: var(--text3);
+    background: var(--surface2);
+    padding: 2px 7px; border-radius: 4px;
+    margin-left: auto;
+  }
+ 
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .filter-input {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    padding: 7px 12px;
+    outline: none;
+    width: 200px;
+    transition: border-color var(--transition);
+  }
+  .filter-input:focus { border-color: var(--accent-glow); }
+  .filter-select {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 12px;
+    padding: 7px 10px;
+    outline: none;
+    cursor: pointer;
+  }
+  .filter-select option { background: var(--surface); }
+ 
+  /* ── DOCUMENT GENERATOR ── */
+  .doc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .doc-layout { grid-template-columns: 1fr; } }
+ 
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .panel-header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .panel-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .panel-body { padding: 18px; }
+ 
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color var(--transition);
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent-glow); }
+  .form-select option { background: #161820; }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+ 
+  .doc-templates {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .doc-template-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 9px 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .doc-template-btn:hover { border-color: var(--accent-glow); color: var(--accent); background: var(--accent-dim); }
+  .doc-template-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+ 
+  .doc-preview {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+    min-height: 200px;
+    position: relative;
+    overflow-y: auto;
+    max-height: 420px;
+    white-space: pre-wrap;
+    font-family: var(--font-mono);
+  }
+  .doc-preview.placeholder-text { color: var(--text3); font-family: var(--font); font-style: italic; white-space: normal; display: flex; align-items: center; justify-content: center; }
+ 
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font); font-size: 13px; font-weight: 600;
+    padding: 9px 16px; border-radius: 8px; border: none;
+    cursor: pointer; transition: all var(--transition);
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); }
+  .btn-secondary { background: var(--surface2); border: 1px solid var(--border2); color: var(--text2); }
+  .btn-secondary:hover { border-color: var(--border2); color: var(--text); background: var(--surface3); }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+ 
+  /* ── POLICIES VIEW ── */
+  .policy-upload-zone {
+    border: 2px dashed var(--border2);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    margin-bottom: 20px;
+  }
+  .policy-upload-zone:hover, .policy-upload-zone.drag-over {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+  }
+  .policy-upload-icon { font-size: 28px; margin-bottom: 8px; }
+  .policy-upload-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .policy-upload-hint { font-size: 12px; color: var(--text3); }
+ 
+  .policy-list { display: flex; flex-direction: column; gap: 10px; }
+  .policy-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .policy-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--accent-dim); color: var(--accent);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .policy-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .policy-meta { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .policy-actions { margin-left: auto; display: flex; gap: 6px; }
+  .policy-action-btn {
+    background: none; border: 1px solid var(--border); color: var(--text3);
+    font-family: var(--font); font-size: 11px; padding: 4px 9px;
+    border-radius: 5px; cursor: pointer; transition: all var(--transition);
+  }
+  .policy-action-btn:hover { border-color: var(--accent-glow); color: var(--accent); }
+ 
+  /* ── DASHBOARD / HOME ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 1100px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+ 
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent-dim));
+    pointer-events: none;
+  }
+  .stat-label { font-size: 11px; color: var(--text3); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .stat-value { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; }
+  .stat-delta { font-size: 11px; font-weight: 500; }
+  .stat-delta.up { color: var(--green); }
+  .stat-delta.down { color: var(--red); }
+  .stat-delta.neutral { color: var(--text3); }
+ 
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+ 
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title-line {
+    flex: 1; height: 1px; background: var(--border);
+  }
+ 
+  .activity-list { display: flex; flex-direction: column; gap: 0; }
+  .activity-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot {
+    width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0;
+  }
+  .activity-text { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+  .activity-text strong { color: var(--text); font-weight: 600; }
+  .activity-time { font-size: 11px; color: var(--text3); margin-left: auto; flex-shrink: 0; white-space: nowrap; }
+ 
+  .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  @media (max-width: 760px) { .quick-actions { grid-template-columns: 1fr 1fr; } }
+  .quick-action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: center;
+  }
+  .quick-action-card:hover { border-color: var(--accent-glow); transform: translateY(-1px); }
+  .quick-action-icon { font-size: 22px; margin-bottom: 8px; }
+  .quick-action-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .quick-action-desc { font-size: 11px; color: var(--text3); }
+ 
+  /* ── LEGAL VIEW ── */
+  .legal-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
+  .legal-category-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all var(--transition);
+    text-align: left;
+    font-family: var(--font);
+  }
+  .legal-category-btn:hover { border-color: var(--accent-glow); }
+  .legal-category-btn.active { border-color: var(--accent); background: var(--accent-dim); }
+  .legal-cat-icon { font-size: 20px; margin-bottom: 6px; }
+  .legal-cat-title { font-size: 12px; font-weight: 600; color: var(--text); }
+  .legal-cat-count { font-size: 11px; color: var(--text3); margin-top: 2px; }
+ 
+  .legal-refs { display: flex; flex-direction: column; gap: 10px; }
+  .legal-ref {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .legal-ref-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .legal-ref-excerpt { font-size: 12px; color: var(--text2); line-height: 1.6; }
+  .legal-ref-footer { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .legal-ref-source { font-size: 11px; color: var(--text3); font-family: var(--font-mono); }
+  .legal-ref-jurisdiction {
+    font-size: 10px; padding: 2px 7px; border-radius: 4px;
+    background: var(--teal-dim); color: var(--teal);
+    font-weight: 600;
+  }
+ 
+  /* ── LOADING DOTS ── */
+  .typing-indicator {
+    display: flex; align-items: center; gap: 4px; padding: 6px 0;
+  }
+  .typing-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: typingPulse 1.2s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typingPulse {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+ 
+  /* ── MISC ── */
+  .empty-state { text-align: center; padding: 48px 20px; color: var(--text3); }
+  .empty-state-icon { font-size: 32px; margin-bottom: 12px; }
+  .empty-state-text { font-size: 14px; }
+ 
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .tag-chip {
+    font-size: 11px; padding: 3px 10px; border-radius: 20px;
+    background: var(--surface2); color: var(--text2);
+    border: 1px solid var(--border); cursor: pointer;
+    transition: all var(--transition); font-weight: 500;
+  }
+  .tag-chip:hover { border-color: var(--accent-glow); color: var(--accent); }
+ 
+  .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid var(--border2);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+ 
+  /* Toast */
+  #toast {
+    position: fixed; bottom: 24px; right: 24px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-size: 13px; font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 9px;
+    z-index: 999;
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #toast.show { transform: translateY(0); opacity: 1; }
+  #toast.success { border-color: rgba(74,222,128,0.3); }
+  #toast.error { border-color: rgba(248,113,113,0.3); }
+ 
+  /* Mobile hamburger */
+  .hamburger {
+    display: none;
+    background: none; border: none; color: var(--text); font-size: 20px;
+    cursor: pointer; padding: 4px;
+  }
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
+ 
+  @media (max-width: 720px) {
+    .sidebar { transform: translateX(-100%); }
+    .sidebar.open { transform: translateX(0); }
+    .main { margin-left: 0; }
+    .hamburger { display: block; }
+    .overlay { display: block; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .doc-layout { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- OVERLAY for mobile -->
+<div class="overlay" id="overlay" onclick="closeSidebar()" style="display:none;"></div>
+ 
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-badge">
+      <div class="logo-icon">V</div>
+      <div>
+        <div class="logo-text">VALT HR</div>
+        <span class="logo-sub">Intelligence Platform</span>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="sidebar-nav">
+    <div class="nav-section-label">Workspace</div>
+    <button class="nav-item active" onclick="navigate('dashboard', this)">
+      <span class="nav-icon">⬡</span> Dashboard
+    </button>
+    <button class="nav-item" onclick="navigate('ask', this)">
+      <span class="nav-icon">✦</span> Ask HR
+      <span class="nav-badge" id="ai-badge">AI</span>
+    </button>
+    <button class="nav-item" onclick="navigate('cases', this)">
+      <span class="nav-icon">◫</span> Cases
+      <span class="nav-badge" id="case-badge">4</span>
+    </button>
+ 
+    <div class="nav-section-label">Tools</div>
+    <button class="nav-item" onclick="navigate('documents', this)">
+      <span class="nav-icon">◻</span> Documents
+    </button>
+    <button class="nav-item" onclick="navigate('policies', this)">
+      <span class="nav-icon">◈</span> Policies
+    </button>
+    <button class="nav-item" onclick="navigate('legal', this)">
+      <span class="nav-icon">⚖</span> Legal Ref
+    </button>
+  </div>
+ 
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="user-avatar">HR</div>
+      <div>
+        <div class="user-name">Admin User</div>
+        <div class="user-role">HR Manager · VALT</div>
+      </div>
+    </div>
+  </div>
+</nav>
+ 
+<!-- MAIN -->
+<div class="main">
+ 
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <button class="hamburger" onclick="openSidebar()">☰</button>
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <button class="topbar-btn" onclick="navigate('policies', null)">⬆ Upload Policy</button>
+    <button class="topbar-btn primary" onclick="navigate('ask', null)">✦ Ask HR AI</button>
+  </div>
+ 
+  <div class="content">
+ 
+    <!-- ── DASHBOARD VIEW ── -->
+    <div class="view active" id="view-dashboard">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Open Cases</div>
+          <div class="stat-value">12</div>
+          <div class="stat-delta down">↑ 3 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Resolved (30d)</div>
+          <div class="stat-value">47</div>
+          <div class="stat-delta up">↑ 18% vs last mo.</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">AI Queries</div>
+          <div class="stat-value">218</div>
+          <div class="stat-delta up">↑ 34% this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Policies Active</div>
+          <div class="stat-value">9</div>
+          <div class="stat-delta neutral">2 pending review</div>
+        </div>
+      </div>
+ 
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Recent Activity</div>
+          </div>
+          <div class="panel-body" style="padding:0 18px;">
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--amber)"></div>
+                <div class="activity-text"><strong>New case opened</strong> — Workplace conflict between departments</div>
+                <div class="activity-time">12m ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--green)"></div>
+                <div class="activity-text"><strong>Document generated</strong> — Performance Improvement Plan · J. Martinez</div>
+                <div class="activity-time">1h ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--teal)"></div>
+                <div class="activity-text"><strong>Policy uploaded</strong> — Remote Work Policy v2.1</div>
+                <div class="activity-time">3h ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--accent)"></div>
+                <div class="activity-text"><strong>AI guidance</strong> — FMLA leave eligibility question answered</div>
+                <div class="activity-time">5h ago</div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot" style="background:var(--red)"></div>
+                <div class="activity-text"><strong>Urgent case flagged</strong> — Harassment complaint requires review</div>
+                <div class="activity-time">Yesterday</div>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        <div>
+          <div class="section-title">Quick Actions <div class="section-title-line"></div></div>
+          <div class="quick-actions">
+            <div class="quick-action-card" onclick="navigate('ask', null)">
+              <div class="quick-action-icon">✦</div>
+              <div class="quick-action-title">Ask HR AI</div>
+              <div class="quick-action-desc">Get instant guidance</div>
+            </div>
+            <div class="quick-action-card" onclick="openNewCase()">
+              <div class="quick-action-icon">+</div>
+              <div class="quick-action-title">New Case</div>
+              <div class="quick-action-desc">Log an HR issue</div>
+            </div>
+            <div class="quick-action-card" onclick="navigate('documents', null)">
+              <div class="quick-action-icon">◻</div>
+              <div class="quick-action-title">Generate Doc</div>
+              <div class="quick-action-desc">PIP, warnings, letters</div>
+            </div>
+            <div class="quick-action-card" onclick="navigate('legal', null)">
+              <div class="quick-action-icon">⚖</div>
+              <div class="quick-action-title">Legal Reference</div>
+              <div class="quick-action-desc">Employment law</div>
+            </div>
+            <div class="quick-action-card" onclick="navigate('policies', null)">
+              <div class="quick-action-icon">◈</div>
+              <div class="quick-action-title">Upload Policy</div>
+              <div class="quick-action-desc">Add to knowledge base</div>
+            </div>
+            <div class="quick-action-card" onclick="navigate('cases', null)">
+              <div class="quick-action-icon">◫</div>
+              <div class="quick-action-title">View Cases</div>
+              <div class="quick-action-desc">4 open items</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── ASK HR VIEW ── -->
+    <div class="view" id="view-ask">
+      <div class="chat-container">
+        <div class="chat-mode-bar">
+          <button class="chat-mode-btn active" onclick="setChatMode('guidance', this)">HR Guidance</button>
+          <button class="chat-mode-btn" onclick="setChatMode('legal', this)">Legal</button>
+          <button class="chat-mode-btn" onclick="setChatMode('policy', this)">Policy Q&A</button>
+        </div>
+ 
+        <div class="tag-row" id="prompt-chips">
+          <span class="tag-chip" onclick="useChip(this)">FMLA eligibility</span>
+          <span class="tag-chip" onclick="useChip(this)">Handle harassment complaint</span>
+          <span class="tag-chip" onclick="useChip(this)">Write a PIP</span>
+          <span class="tag-chip" onclick="useChip(this)">Overtime pay rules</span>
+          <span class="tag-chip" onclick="useChip(this)">At-will termination</span>
+          <span class="tag-chip" onclick="useChip(this)">Reasonable accommodation</span>
+        </div>
+ 
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg">
+            <div class="msg-avatar ai">V</div>
+            <div>
+              <div class="msg-bubble">
+                <p>Hello! I'm VALT HR Intelligence — your AI-powered HR advisor.</p>
+                <p>I can help with <strong>HR policy guidance</strong>, <strong>employment law questions</strong>, <strong>case management advice</strong>, and <strong>document drafting</strong>. Ask me anything about your workplace HR needs.</p>
+                <div class="msg-disclaimer">⚠ AI guidance is informational only. Consult legal counsel for specific legal matters.</div>
+              </div>
+              <div class="msg-meta">VALT HR AI · just now</div>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="chat-input-area">
+          <div class="chat-input-row">
+            <textarea
+              id="chat-input"
+              placeholder="Ask an HR question..."
+              rows="1"
+              onkeydown="handleChatKey(event)"
+              oninput="autoResize(this)"
+            ></textarea>
+            <button class="chat-send-btn" onclick="sendChat()">➤</button>
+          </div>
+          <div class="chat-input-footer">
+            <span class="chat-mode-tag" id="mode-tag">hr-guidance</span>
+            <span class="chat-hint">Enter to send · Shift+Enter for new line</span>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── CASES VIEW ── -->
+    <div class="view" id="view-cases">
+      <div class="filter-bar">
+        <input type="text" class="filter-input" placeholder="Search cases..." oninput="filterCases(this.value)" />
+        <select class="filter-select" onchange="filterCaseStatus(this.value)">
+          <option value="all">All Status</option>
+          <option value="open">Open</option>
+          <option value="review">In Review</option>
+          <option value="urgent">Urgent</option>
+          <option value="closed">Closed</option>
+        </select>
+        <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="openNewCase()">+ New Case</button>
+      </div>
+ 
+      <div class="cases-grid" id="cases-grid"></div>
+    </div>
+ 
+    <!-- ── DOCUMENTS VIEW ── -->
+    <div class="view" id="view-documents">
+      <div class="doc-layout">
+        <div>
+          <div class="panel" style="margin-bottom:16px;">
+            <div class="panel-header"><div class="panel-title">Document Type</div></div>
+            <div class="panel-body">
+              <div class="doc-templates" id="doc-templates">
+                <button class="doc-template-btn active" onclick="selectDocType('pip', this)">📋 Performance Plan</button>
+                <button class="doc-template-btn" onclick="selectDocType('warning', this)">⚠️ Written Warning</button>
+                <button class="doc-template-btn" onclick="selectDocType('termination', this)">🚫 Termination Letter</button>
+                <button class="doc-template-btn" onclick="selectDocType('offer', this)">✉️ Offer Letter</button>
+                <button class="doc-template-btn" onclick="selectDocType('accommodation', this)">♿ Accommodation</button>
+                <button class="doc-template-btn" onclick="selectDocType('policy', this)">📄 Policy Notice</button>
+              </div>
+            </div>
+          </div>
+ 
+          <div class="panel">
+            <div class="panel-header"><div class="panel-title">Employee Details</div></div>
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="form-label">Employee Name</label>
+                <input type="text" class="form-input" id="doc-employee" placeholder="Full name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Position / Title</label>
+                <input type="text" class="form-input" id="doc-position" placeholder="Job title" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Department</label>
+                <input type="text" class="form-input" id="doc-dept" placeholder="Department" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Issue / Context</label>
+                <textarea class="form-textarea" id="doc-context" placeholder="Describe the situation or performance issues..."></textarea>
+              </div>
+              <button class="btn btn-primary" style="width:100%" onclick="generateDocument()">
+                <span id="doc-btn-content">✦ Generate Document</span>
+              </button>
+            </div>
+          </div>
+        </div>
+ 
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Document Preview</div>
+            <div style="margin-left:auto;display:flex;gap:8px;">
+              <button class="btn btn-secondary btn-sm" onclick="copyDoc()">Copy</button>
+              <button class="btn btn-secondary btn-sm" onclick="downloadDoc()">Download</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="doc-preview placeholder-text" id="doc-preview">
+              Select a document type and fill in the details, then click Generate.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- ── POLICIES VIEW ── -->
+    <div class="view" id="view-policies">
+      <div class="policy-upload-zone" id="upload-zone"
+        onclick="document.getElementById('policy-file-input').click()"
+        ondragover="event.preventDefault();this.classList.add('drag-over')"
+        ondragleave="this.classList.remove('drag-over')"
+        ondrop="handlePolicyDrop(event)">
+        <div class="policy-upload-icon">⬆</div>
+        <div class="policy-upload-title">Upload Policy Document</div>
+        <div class="policy-upload-hint">PDF or text file · drag & drop or click to browse</div>
+      </div>
+      <input type="file" id="policy-file-input" accept=".pdf,.txt,.doc,.docx" style="display:none" onchange="handlePolicyUpload(this.files)" />
+ 
+      <div class="section-title">Uploaded Policies <div class="section-title-line"></div></div>
+      <div class="policy-list" id="policy-list"></div>
+    </div>
+ 
+    <!-- ── LEGAL VIEW ── -->
+    <div class="view" id="view-legal">
+      <div class="legal-categories" id="legal-categories"></div>
+      <div class="section-title" id="legal-refs-title">All References <div class="section-title-line"></div></div>
+      <div class="legal-refs" id="legal-refs"></div>
+    </div>
+ 
+  </div><!-- /content -->
+</div><!-- /main -->
+ 
+<div id="toast"></div>
+ 
+<script>
+const API = 'https://hr-guidance-api.replit.app';
+ 
+// ─── Navigation ───────────────────────────────────────────────────────────────
+let currentView = 'dashboard';
+let currentMode = 'guidance';
+let selectedDocType = 'pip';
+let selectedLegalCat = 'all';
+let generatedDocText = '';
+ 
+function navigate(view, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('view-' + view).classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.nav-item').forEach(n => {
+      if (n.textContent.toLowerCase().includes(view.toLowerCase().replace('-',' '))) {
+        n.classList.add('active');
+      }
+    });
+  }
+  currentView = view;
+  const titles = { dashboard:'Dashboard', ask:'Ask HR Intelligence', cases:'Cases', documents:'Document Generator', policies:'Policy Library', legal:'Legal Reference' };
+  document.getElementById('topbar-title').textContent = titles[view] || view;
+  closeSidebar();
+}
+ 
+// ─── Mobile sidebar ───────────────────────────────────────────────────────────
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('overlay').style.display = 'block';
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').style.display = 'none';
+}
+ 
+// ─── Toast ────────────────────────────────────────────────────────────────────
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'show ' + type;
+  setTimeout(() => t.className = '', 3000);
+}
+ 
+// ─── Chat ─────────────────────────────────────────────────────────────────────
+let chatHistory = [];
+ 
+function setChatMode(mode, btn) {
+  currentMode = mode;
+  document.querySelectorAll('.chat-mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('mode-tag').textContent = mode === 'guidance' ? 'hr-guidance' : mode;
+  const chips = { guidance: ['FMLA eligibility','Handle harassment complaint','Write a PIP','Overtime pay rules','At-will termination','Reasonable accommodation'], legal: ['Title VII','FLSA overtime','ADA compliance','FMLA basics','NLRA rights','Workers compensation'], policy: ['Remote work policy','Anti-harassment policy','PTO policy','Social media policy','Termination process','Onboarding steps'] };
+  const row = document.getElementById('prompt-chips');
+  row.innerHTML = (chips[mode]||chips.guidance).map(c => `<span class="tag-chip" onclick="useChip(this)">${c}</span>`).join('');
+}
+ 
+function useChip(el) {
+  document.getElementById('chat-input').value = el.textContent;
+  sendChat();
+}
+ 
+function handleChatKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+}
+ 
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+ 
+function appendMsg(role, html) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg' + (role === 'user' ? ' user' : '');
+  const initials = role === 'user' ? 'HR' : 'V';
+  const avatarClass = role === 'user' ? 'user' : 'ai';
+  div.innerHTML = `<div class="msg-avatar ${avatarClass}">${initials}</div><div><div class="msg-bubble">${html}</div><div class="msg-meta">${role === 'user' ? 'You' : 'VALT HR AI'} · just now</div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+ 
+function appendTyping() {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg';
+  div.id = 'typing-indicator';
+  div.innerHTML = `<div class="msg-avatar ai">V</div><div><div class="msg-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+ 
+async function sendChat() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = 'auto';
+ 
+  appendMsg('user', `<p>${text.replace(/</g,'&lt;')}</p>`);
+  chatHistory.push({ role: 'user', content: text });
+  appendTyping();
+ 
+  try {
+    let endpoint = '/api/hr/ask';
+    let body = { question: text, context: currentMode, conversationHistory: chatHistory.slice(-10) };
+ 
+    const res = await fetch(API + endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+ 
+    document.getElementById('typing-indicator')?.remove();
+ 
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const data = await res.json();
+    const answer = data.answer || data.guidance || data.response || data.message || 'No response received.';
+    const formatted = answer.replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    chatHistory.push({ role: 'assistant', content: answer });
+    const msgDiv = appendMsg('ai', `<p>${formatted}</p><div class="msg-disclaimer">⚠ This is AI-generated guidance for informational purposes only.</div>`);
+  } catch (err) {
+    document.getElementById('typing-indicator')?.remove();
+    appendMsg('ai', `<p>I'm having trouble connecting to the HR API right now. Please check that <code>https://hr-guidance-api.replit.app</code> is running.</p><p>Error: ${err.message}</p>`);
+  }
+}
+ 
+// ─── Cases ────────────────────────────────────────────────────────────────────
+const DEMO_CASES = [
+  { id:'HR-2024-041', title:'Workplace Harassment Complaint', desc:'Employee reports repeated inappropriate comments from a colleague in the engineering department.', status:'urgent', category:'Harassment', date:'Mar 14', priority:'red' },
+  { id:'HR-2024-040', title:'FMLA Leave Request', desc:'Employee requesting Family and Medical Leave for parental duties. Documentation under review.', status:'review', category:'Leave', date:'Mar 12', priority:'teal' },
+  { id:'HR-2024-039', title:'Performance Improvement Plan', desc:'Sales team member consistently missing quarterly targets for 2 consecutive quarters.', status:'open', category:'Performance', date:'Mar 10', priority:'amber' },
+  { id:'HR-2024-038', title:'Accommodation Request', desc:'Disability accommodation request for ergonomic workstation and flexible break schedule.', status:'review', category:'ADA', date:'Mar 9', priority:'teal' },
+  { id:'HR-2024-037', title:'Wage Dispute', desc:'Hourly employee disputes overtime calculations for Q4. Payroll review requested.', status:'open', category:'Compensation', date:'Mar 7', priority:'amber' },
+  { id:'HR-2024-035', title:'Exit Interview — R. Chen', desc:'Voluntary resignation. Exit interview completed. Offboarding in progress.', status:'closed', category:'Offboarding', date:'Mar 1', priority:'gray' },
+];
+ 
+let allCases = [...DEMO_CASES];
+ 
+function renderCases(cases) {
+  const grid = document.getElementById('cases-grid');
+  if (!cases.length) { grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">◫</div><div class="empty-state-text">No cases found</div></div>`; return; }
+  grid.innerHTML = cases.map(c => `
+    <div class="case-card">
+      <div class="case-header">
+        <div>
+          <div class="case-id">${c.id}</div>
+          <div class="case-title">${c.title}</div>
+        </div>
+        <span class="status-pill status-${c.status}">${c.status}</span>
+      </div>
+      <div class="case-desc">${c.desc}</div>
+      <div class="case-footer">
+        <div class="priority-dot" style="background:var(--${c.priority})"></div>
+        <span class="case-category">${c.category}</span>
+        <span class="case-meta">${c.date}</span>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function filterCases(q) {
+  const filtered = allCases.filter(c => c.title.toLowerCase().includes(q.toLowerCase()) || c.desc.toLowerCase().includes(q.toLowerCase()) || c.id.toLowerCase().includes(q.toLowerCase()));
+  renderCases(filtered);
+}
+ 
+function filterCaseStatus(status) {
+  const filtered = status === 'all' ? allCases : allCases.filter(c => c.status === status);
+  renderCases(filtered);
+}
+ 
+function openNewCase() {
+  navigate('ask', null);
+  setTimeout(() => {
+    document.getElementById('chat-input').value = 'I need to open a new HR case. ';
+    document.getElementById('chat-input').focus();
+  }, 200);
+}
+ 
+async function loadCases() {
+  try {
+    const res = await fetch(API + '/api/hr/cases');
+    if (res.ok) {
+      const data = await res.json();
+      if (data.cases && data.cases.length) {
+        allCases = data.cases.map(c => ({ ...c, status: c.status || 'open', priority: 'amber' }));
+        document.getElementById('case-badge').textContent = allCases.filter(c => c.status === 'open' || c.status === 'urgent').length;
+      }
+    }
+  } catch(e) {}
+  renderCases(allCases);
+}
+ 
+// ─── Documents ────────────────────────────────────────────────────────────────
+const DOC_TYPES = { pip:'Performance Improvement Plan', warning:'Written Warning', termination:'Termination Letter', offer:'Offer Letter', accommodation:'Reasonable Accommodation Letter', policy:'Policy Notice' };
+ 
+function selectDocType(type, btn) {
+  selectedDocType = type;
+  document.querySelectorAll('.doc-template-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+ 
+async function generateDocument() {
+  const employee = document.getElementById('doc-employee').value.trim();
+  const position = document.getElementById('doc-position').value.trim();
+  const dept = document.getElementById('doc-dept').value.trim();
+  const context = document.getElementById('doc-context').value.trim();
+ 
+  if (!employee) { showToast('Please enter an employee name', 'error'); return; }
+ 
+  const btn = document.getElementById('doc-btn-content');
+  btn.innerHTML = '<span class="spinner"></span> Generating...';
+ 
+  const preview = document.getElementById('doc-preview');
+  preview.className = 'doc-preview';
+  preview.textContent = 'Generating document...';
+ 
+  try {
+    const res = await fetch(API + '/api/hr/document', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ documentType: selectedDocType, employeeName: employee, position, department: dept, context, documentTitle: DOC_TYPES[selectedDocType] })
+    });
+ 
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const data = await res.json();
+    generatedDocText = data.document || data.content || data.text || JSON.stringify(data, null, 2);
+    preview.textContent = generatedDocText;
+    showToast('Document generated successfully', 'success');
+  } catch (err) {
+    preview.textContent = generateFallbackDoc(selectedDocType, employee, position, dept, context);
+    generatedDocText = preview.textContent;
+    showToast('Using offline template (API unavailable)', '');
+  } finally {
+    btn.innerHTML = '✦ Generate Document';
+  }
+}
+ 
+function generateFallbackDoc(type, name, position, dept, context) {
+  const date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  const templates = {
+    pip: `PERFORMANCE IMPROVEMENT PLAN\n\nDate: ${date}\nEmployee: ${name}\nPosition: ${position}\nDepartment: ${dept}\n\nPURPOSE\nThis Performance Improvement Plan (PIP) outlines specific performance expectations and goals that must be met within the next 60 days.\n\nPERFORMANCE CONCERNS\n${context || 'Performance has not met the required standards for this role.'}\n\nEXPECTATIONS\n1. Meet or exceed all core KPIs as outlined in the job description\n2. Attend weekly check-in meetings with direct manager\n3. Complete assigned training by the end of this period\n\nCONSEQUENCES\nFailure to meet the expectations outlined in this plan may result in further disciplinary action, up to and including termination of employment.\n\nEmployee Signature: ____________________  Date: ________\nManager Signature: ____________________  Date: ________`,
+    warning: `WRITTEN WARNING\n\nDate: ${date}\nEmployee: ${name}\nPosition: ${position}\nDepartment: ${dept}\n\nThis written warning is issued regarding the following matter:\n\n${context || 'Conduct or performance that does not meet company standards.'}\n\nThis is your [first / second] written warning. Further violations may result in termination.\n\nEmployee Signature: ____________________  Date: ________\nManager Signature: ____________________  Date: ________`,
+  };
+  return templates[type] || `[${DOC_TYPES[type]||type}]\n\nDate: ${date}\nEmployee: ${name}\nPosition: ${position}\nDepartment: ${dept}\n\n${context || 'Document content will appear here.'}`;
+}
+ 
+function copyDoc() {
+  if (!generatedDocText) { showToast('Nothing to copy yet', ''); return; }
+  navigator.clipboard.writeText(generatedDocText).then(() => showToast('Copied to clipboard', 'success'));
+}
+ 
+function downloadDoc() {
+  if (!generatedDocText) { showToast('Nothing to download yet', ''); return; }
+  const blob = new Blob([generatedDocText], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = (DOC_TYPES[selectedDocType] || 'document').replace(/\s+/g, '_') + '.txt';
+  a.click();
+  showToast('Document downloaded', 'success');
+}
+ 
+// ─── Policies ─────────────────────────────────────────────────────────────────
+const DEMO_POLICIES = [
+  { name:'Employee Code of Conduct', size:'245 KB', date:'Mar 10, 2024', type:'pdf' },
+  { name:'Remote Work Policy v2.1', size:'118 KB', date:'Mar 12, 2024', type:'pdf' },
+  { name:'Anti-Harassment Policy', size:'89 KB', date:'Feb 28, 2024', type:'pdf' },
+  { name:'PTO & Leave Policy', size:'156 KB', date:'Feb 15, 2024', type:'pdf' },
+];
+ 
+function renderPolicies(policies) {
+  document.getElementById('policy-list').innerHTML = policies.map(p => `
+    <div class="policy-item">
+      <div class="policy-icon">📄</div>
+      <div>
+        <div class="policy-name">${p.name}</div>
+        <div class="policy-meta">${p.type.toUpperCase()} · ${p.size} · Uploaded ${p.date}</div>
+      </div>
+      <div class="policy-actions">
+        <button class="policy-action-btn" onclick="askAboutPolicy('${p.name}')">Ask AI</button>
+        <button class="policy-action-btn">View</button>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function askAboutPolicy(name) {
+  navigate('ask', null);
+  setTimeout(() => {
+    document.getElementById('chat-input').value = `What does our ${name} say about `;
+    document.getElementById('chat-input').focus();
+  }, 200);
+}
+ 
+function handlePolicyUpload(files) {
+  if (!files || !files.length) return;
+  const file = files[0];
+  uploadPolicy(file);
+}
+ 
+function handlePolicyDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file) uploadPolicy(file);
+}
+ 
+async function uploadPolicy(file) {
+  showToast('Uploading policy...', '');
+  try {
+    const formData = new FormData();
+    formData.append('policy', file);
+    formData.append('name', file.name);
+    const res = await fetch(API + '/api/hr/policies/upload', { method: 'POST', body: formData });
+    const size = (file.size / 1024).toFixed(0) + ' KB';
+    const date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+    DEMO_POLICIES.unshift({ name: file.name.replace(/\.[^.]+$/, ''), size, date, type: file.name.split('.').pop() });
+    renderPolicies(DEMO_POLICIES);
+    showToast('Policy uploaded to knowledge base', 'success');
+  } catch(e) {
+    const size = (file.size / 1024).toFixed(0) + ' KB';
+    const date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'numeric' });
+    DEMO_POLICIES.unshift({ name: file.name.replace(/\.[^.]+$/, ''), size, date, type: file.name.split('.').pop() });
+    renderPolicies(DEMO_POLICIES);
+    showToast('Saved locally (API unreachable)', '');
+  }
+}
+ 
+// ─── Legal ────────────────────────────────────────────────────────────────────
+const LEGAL_CATEGORIES = [
+  { id:'harassment', icon:'🚫', title:'Anti-Discrimination', count: 12 },
+  { id:'leave', icon:'📅', title:'Leave & FMLA', count: 8 },
+  { id:'wage', icon:'💰', title:'Wage & Hour', count: 15 },
+  { id:'safety', icon:'🦺', title:'Workplace Safety', count: 10 },
+  { id:'termination', icon:'📋', title:'Termination', count: 7 },
+  { id:'ada', icon:'♿', title:'ADA / Accessibility', count: 9 },
+];
+ 
+const LEGAL_REFS = [
+  { title:'Title VII of the Civil Rights Act', excerpt:'Prohibits employment discrimination based on race, color, religion, sex, or national origin. Applies to employers with 15+ employees.', source:'42 U.S.C. § 2000e', jurisdiction:'Federal', category:'harassment' },
+  { title:'Americans with Disabilities Act (ADA)', excerpt:'Requires employers to provide reasonable accommodations to qualified individuals with disabilities and prohibits disability-based discrimination.', source:'42 U.S.C. § 12101', jurisdiction:'Federal', category:'ada' },
+  { title:'Family and Medical Leave Act (FMLA)', excerpt:'Entitles eligible employees to 12 weeks of unpaid, job-protected leave for specified family and medical reasons with continuation of group health insurance coverage.', source:'29 U.S.C. § 2601', jurisdiction:'Federal', category:'leave' },
+  { title:'Fair Labor Standards Act — Overtime', excerpt:'Non-exempt employees must receive overtime pay at 1.5x their regular rate for all hours worked over 40 in a workweek.', source:'29 U.S.C. § 207', jurisdiction:'Federal', category:'wage' },
+  { title:'OSHA General Duty Clause', excerpt:'Requires employers to provide a workplace free from recognized hazards that are causing or are likely to cause death or serious physical harm.', source:'29 U.S.C. § 654(a)(1)', jurisdiction:'Federal', category:'safety' },
+  { title:'WARN Act — Mass Layoffs', excerpt:'Requires employers with 100+ employees to provide 60-day advance notice of plant closings and mass layoffs affecting 50 or more employees.', source:'29 U.S.C. § 2101', jurisdiction:'Federal', category:'termination' },
+  { title:'Equal Pay Act', excerpt:'Requires that men and women in the same workplace be given equal pay for equal work. Jobs do not need to be identical but must be substantially equal.', source:'29 U.S.C. § 206(d)', jurisdiction:'Federal', category:'wage' },
+  { title:'National Labor Relations Act', excerpt:'Protects employees right to organize, bargain collectively, and engage in concerted activity. Prohibits unfair labor practices by employers.', source:'29 U.S.C. § 151', jurisdiction:'Federal', category:'harassment' },
+];
+ 
+function renderLegalCategories() {
+  document.getElementById('legal-categories').innerHTML = LEGAL_CATEGORIES.map(c => `
+    <button class="legal-category-btn ${selectedLegalCat===c.id?'active':''}" onclick="filterLegal('${c.id}', this)">
+      <div class="legal-cat-icon">${c.icon}</div>
+      <div class="legal-cat-title">${c.title}</div>
+      <div class="legal-cat-count">${c.count} references</div>
+    </button>
+  `).join('');
+}
+ 
+function renderLegalRefs(refs) {
+  document.getElementById('legal-refs').innerHTML = refs.map(r => `
+    <div class="legal-ref">
+      <div class="legal-ref-title">${r.title}</div>
+      <div class="legal-ref-excerpt">${r.excerpt}</div>
+      <div class="legal-ref-footer">
+        <span class="legal-ref-source">${r.source}</span>
+        <span class="legal-ref-jurisdiction">${r.jurisdiction}</span>
+        <button class="policy-action-btn" style="margin-left:auto" onclick="askLegal('${r.title}')">Ask AI →</button>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function filterLegal(cat, btn) {
+  selectedLegalCat = selectedLegalCat === cat ? 'all' : cat;
+  renderLegalCategories();
+  const filtered = selectedLegalCat === 'all' ? LEGAL_REFS : LEGAL_REFS.filter(r => r.category === selectedLegalCat);
+  renderLegalRefs(filtered);
+  const catLabel = selectedLegalCat === 'all' ? 'All References' : LEGAL_CATEGORIES.find(c=>c.id===selectedLegalCat)?.title || 'References';
+  document.getElementById('legal-refs-title').innerHTML = `${catLabel} <div class="section-title-line"></div>`;
+}
+ 
+function askLegal(title) {
+  navigate('ask', null);
+  setChatMode('legal', document.querySelectorAll('.chat-mode-btn')[1]);
+  setTimeout(() => {
+    document.getElementById('chat-input').value = `Explain how ${title} applies to our workplace `;
+    document.getElementById('chat-input').focus();
+  }, 200);
+}
+ 
+// ─── Init ─────────────────────────────────────────────────────────────────────
+renderCases(DEMO_CASES);
+renderPolicies(DEMO_POLICIES);
+renderLegalCategories();
+renderLegalRefs(LEGAL_REFS);
+loadCases();
+</script>
+</body>
+</html>
+ 
