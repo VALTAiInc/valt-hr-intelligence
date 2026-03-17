@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +7,10 @@
 <title>VALT HR Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet" />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   :root {
     --bg: #08090C;
     --surface: #0F1117;
@@ -40,7 +41,7 @@
     --sidebar: 240px;
     --transition: 180ms ease;
   }
- 
+
   body {
     font-family: var(--font);
     background: var(--bg);
@@ -51,7 +52,7 @@
     font-size: 14px;
     line-height: 1.6;
   }
- 
+
   /* ── SIDEBAR ── */
   .sidebar {
     width: var(--sidebar);
@@ -66,7 +67,7 @@
     z-index: 100;
     transition: transform var(--transition);
   }
- 
+
   .sidebar-logo {
     padding: 20px 18px 18px;
     border-bottom: 1px solid var(--border);
@@ -102,7 +103,7 @@
     text-transform: uppercase;
     margin-top: 2px;
   }
- 
+
   .sidebar-nav {
     flex: 1;
     padding: 12px 10px;
@@ -148,7 +149,7 @@
     min-width: 18px;
     text-align: center;
   }
- 
+
   .sidebar-bottom {
     padding: 12px 10px;
     border-top: 1px solid var(--border);
@@ -168,7 +169,7 @@
   }
   .user-name { font-size: 12px; font-weight: 600; color: var(--text); }
   .user-role { font-size: 10px; color: var(--text3); }
- 
+
   /* ── MAIN ── */
   .main {
     margin-left: var(--sidebar);
@@ -179,7 +180,7 @@
     overflow-y: auto;
     max-height: 100vh;
   }
- 
+
   .topbar {
     position: sticky; top: 0; z-index: 50;
     background: rgba(8,9,12,0.85);
@@ -217,13 +218,13 @@
     color: #fff;
   }
   .topbar-btn.primary:hover { background: var(--accent2); }
- 
+
   .content { padding: 24px; flex: 1; }
- 
+
   /* ── VIEWS (shown/hidden) ── */
   .view { display: none; }
   .view.active { display: block; }
- 
+
   /* ── ASK HR / CHAT VIEW ── */
   .chat-container {
     display: flex;
@@ -255,7 +256,7 @@
     background: var(--accent);
     color: #fff;
   }
- 
+
   .chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -268,7 +269,7 @@
   }
   .chat-messages::-webkit-scrollbar { width: 4px; }
   .chat-messages::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
- 
+
   .msg {
     display: flex;
     gap: 12px;
@@ -315,7 +316,7 @@
     font-family: var(--font-mono);
   }
   .msg-meta { font-size: 11px; color: var(--text3); margin-top: 6px; }
- 
+
   .msg-disclaimer {
     font-size: 11px;
     color: var(--text3);
@@ -325,7 +326,7 @@
     border-radius: 6px;
     margin-top: 8px;
   }
- 
+
   .chat-input-area {
     margin-top: 16px;
     background: var(--surface);
@@ -382,7 +383,7 @@
     font-family: var(--font-mono);
   }
   .chat-hint { font-size: 11px; color: var(--text3); margin-left: auto; }
- 
+
   /* ── CASES VIEW ── */
   .cases-grid {
     display: grid;
@@ -420,7 +421,7 @@
     padding: 2px 7px; border-radius: 4px;
     margin-left: auto;
   }
- 
+
   /* ── FILTER BAR ── */
   .filter-bar {
     display: flex; align-items: center; gap: 10px;
@@ -451,11 +452,11 @@
     cursor: pointer;
   }
   .filter-select option { background: var(--surface); }
- 
+
   /* ── DOCUMENT GENERATOR ── */
   .doc-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 900px) { .doc-layout { grid-template-columns: 1fr; } }
- 
+
   .panel {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -469,7 +470,7 @@
   }
   .panel-title { font-size: 13px; font-weight: 600; color: var(--text); }
   .panel-body { padding: 18px; }
- 
+
   .form-group { margin-bottom: 14px; }
   .form-label { font-size: 11px; font-weight: 600; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 6px; display: block; }
   .form-input, .form-select, .form-textarea {
@@ -487,7 +488,7 @@
   .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent-glow); }
   .form-select option { background: #161820; }
   .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
- 
+
   .doc-templates {
     display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
     margin-bottom: 16px;
@@ -508,7 +509,7 @@
   }
   .doc-template-btn:hover { border-color: var(--accent-glow); color: var(--accent); background: var(--accent-dim); }
   .doc-template-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
- 
+
   .doc-preview {
     background: var(--surface2);
     border-radius: 8px;
@@ -524,7 +525,7 @@
     font-family: var(--font-mono);
   }
   .doc-preview.placeholder-text { color: var(--text3); font-family: var(--font); font-style: italic; white-space: normal; display: flex; align-items: center; justify-content: center; }
- 
+
   .btn {
     display: inline-flex; align-items: center; gap: 7px;
     font-family: var(--font); font-size: 13px; font-weight: 600;
@@ -536,7 +537,7 @@
   .btn-secondary { background: var(--surface2); border: 1px solid var(--border2); color: var(--text2); }
   .btn-secondary:hover { border-color: var(--border2); color: var(--text); background: var(--surface3); }
   .btn-sm { padding: 6px 12px; font-size: 12px; }
- 
+
   /* ── POLICIES VIEW ── */
   .policy-upload-zone {
     border: 2px dashed var(--border2);
@@ -554,7 +555,7 @@
   .policy-upload-icon { font-size: 28px; margin-bottom: 8px; }
   .policy-upload-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
   .policy-upload-hint { font-size: 12px; color: var(--text3); }
- 
+
   .policy-list { display: flex; flex-direction: column; gap: 10px; }
   .policy-item {
     background: var(--surface);
@@ -578,7 +579,7 @@
     border-radius: 5px; cursor: pointer; transition: all var(--transition);
   }
   .policy-action-btn:hover { border-color: var(--accent-glow); color: var(--accent); }
- 
+
   /* ── DASHBOARD / HOME ── */
   .stats-row {
     display: grid;
@@ -587,7 +588,7 @@
     margin-bottom: 24px;
   }
   @media (max-width: 1100px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
- 
+
   .stat-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -605,15 +606,15 @@
     pointer-events: none;
   }
   .stat-label { font-size: 11px; color: var(--text3); font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
-  .stat-value { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; }
+  .stat-value { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 30px; font-weight: 800; color: var(--text); line-height: 1; margin-bottom: 6px; letter-spacing: -1px; }
   .stat-delta { font-size: 11px; font-weight: 500; }
   .stat-delta.up { color: var(--green); }
   .stat-delta.down { color: var(--red); }
   .stat-delta.neutral { color: var(--text3); }
- 
+
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
   @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
- 
+
   .section-title {
     font-family: var(--font-display);
     font-size: 14px;
@@ -625,7 +626,7 @@
   .section-title-line {
     flex: 1; height: 1px; background: var(--border);
   }
- 
+
   .activity-list { display: flex; flex-direction: column; gap: 0; }
   .activity-item {
     display: flex; align-items: flex-start; gap: 12px;
@@ -639,7 +640,7 @@
   .activity-text { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
   .activity-text strong { color: var(--text); font-weight: 600; }
   .activity-time { font-size: 11px; color: var(--text3); margin-left: auto; flex-shrink: 0; white-space: nowrap; }
- 
+
   .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   @media (max-width: 760px) { .quick-actions { grid-template-columns: 1fr 1fr; } }
   .quick-action-card {
@@ -655,7 +656,7 @@
   .quick-action-icon { font-size: 22px; margin-bottom: 8px; }
   .quick-action-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
   .quick-action-desc { font-size: 11px; color: var(--text3); }
- 
+
   /* ── LEGAL VIEW ── */
   .legal-categories { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
   .legal-category-btn {
@@ -673,7 +674,7 @@
   .legal-cat-icon { font-size: 20px; margin-bottom: 6px; }
   .legal-cat-title { font-size: 12px; font-weight: 600; color: var(--text); }
   .legal-cat-count { font-size: 11px; color: var(--text3); margin-top: 2px; }
- 
+
   .legal-refs { display: flex; flex-direction: column; gap: 10px; }
   .legal-ref {
     background: var(--surface);
@@ -690,7 +691,7 @@
     background: var(--teal-dim); color: var(--teal);
     font-weight: 600;
   }
- 
+
   /* ── LOADING DOTS ── */
   .typing-indicator {
     display: flex; align-items: center; gap: 4px; padding: 6px 0;
@@ -706,12 +707,12 @@
     0%, 100% { opacity: 0.2; transform: scale(0.8); }
     50% { opacity: 1; transform: scale(1); }
   }
- 
+
   /* ── MISC ── */
   .empty-state { text-align: center; padding: 48px 20px; color: var(--text3); }
   .empty-state-icon { font-size: 32px; margin-bottom: 12px; }
   .empty-state-text { font-size: 14px; }
- 
+
   .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
   .tag-chip {
     font-size: 11px; padding: 3px 10px; border-radius: 20px;
@@ -720,7 +721,7 @@
     transition: all var(--transition); font-weight: 500;
   }
   .tag-chip:hover { border-color: var(--accent-glow); color: var(--accent); }
- 
+
   .spinner {
     width: 16px; height: 16px;
     border: 2px solid var(--border2);
@@ -730,7 +731,7 @@
     display: inline-block;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
- 
+
   /* Toast */
   #toast {
     position: fixed; bottom: 24px; right: 24px;
@@ -749,7 +750,7 @@
   #toast.show { transform: translateY(0); opacity: 1; }
   #toast.success { border-color: rgba(74,222,128,0.3); }
   #toast.error { border-color: rgba(248,113,113,0.3); }
- 
+
   /* Mobile hamburger */
   .hamburger {
     display: none;
@@ -757,7 +758,7 @@
     cursor: pointer; padding: 4px;
   }
   .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 90; }
- 
+
   @media (max-width: 720px) {
     .sidebar { transform: translateX(-100%); }
     .sidebar.open { transform: translateX(0); }
@@ -771,10 +772,10 @@
 </style>
 </head>
 <body>
- 
+
 <!-- OVERLAY for mobile -->
 <div class="overlay" id="overlay" onclick="closeSidebar()" style="display:none;"></div>
- 
+
 <!-- SIDEBAR -->
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
@@ -786,7 +787,7 @@
       </div>
     </div>
   </div>
- 
+
   <div class="sidebar-nav">
     <div class="nav-section-label">Workspace</div>
     <button class="nav-item active" onclick="navigate('dashboard', this)">
@@ -800,7 +801,7 @@
       <span class="nav-icon">◫</span> Cases
       <span class="nav-badge" id="case-badge">4</span>
     </button>
- 
+
     <div class="nav-section-label">Tools</div>
     <button class="nav-item" onclick="navigate('documents', this)">
       <span class="nav-icon">◻</span> Documents
@@ -812,7 +813,7 @@
       <span class="nav-icon">⚖</span> Legal Ref
     </button>
   </div>
- 
+
   <div class="sidebar-bottom">
     <div class="user-row">
       <div class="user-avatar">HR</div>
@@ -823,10 +824,10 @@
     </div>
   </div>
 </nav>
- 
+
 <!-- MAIN -->
 <div class="main">
- 
+
   <!-- TOPBAR -->
   <div class="topbar">
     <button class="hamburger" onclick="openSidebar()">☰</button>
@@ -834,9 +835,9 @@
     <button class="topbar-btn" onclick="navigate('policies', null)">⬆ Upload Policy</button>
     <button class="topbar-btn primary" onclick="navigate('ask', null)">✦ Ask HR AI</button>
   </div>
- 
+
   <div class="content">
- 
+
     <!-- ── DASHBOARD VIEW ── -->
     <div class="view active" id="view-dashboard">
       <div class="stats-row">
@@ -861,7 +862,7 @@
           <div class="stat-delta neutral">2 pending review</div>
         </div>
       </div>
- 
+
       <div class="two-col">
         <div class="panel">
           <div class="panel-header">
@@ -897,7 +898,7 @@
             </div>
           </div>
         </div>
- 
+
         <div>
           <div class="section-title">Quick Actions <div class="section-title-line"></div></div>
           <div class="quick-actions">
@@ -935,7 +936,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- ── ASK HR VIEW ── -->
     <div class="view" id="view-ask">
       <div class="chat-container">
@@ -944,7 +945,7 @@
           <button class="chat-mode-btn" onclick="setChatMode('legal', this)">Legal</button>
           <button class="chat-mode-btn" onclick="setChatMode('policy', this)">Policy Q&A</button>
         </div>
- 
+
         <div class="tag-row" id="prompt-chips">
           <span class="tag-chip" onclick="useChip(this)">FMLA eligibility</span>
           <span class="tag-chip" onclick="useChip(this)">Handle harassment complaint</span>
@@ -953,7 +954,7 @@
           <span class="tag-chip" onclick="useChip(this)">At-will termination</span>
           <span class="tag-chip" onclick="useChip(this)">Reasonable accommodation</span>
         </div>
- 
+
         <div class="chat-messages" id="chat-messages">
           <div class="msg">
             <div class="msg-avatar ai">V</div>
@@ -967,7 +968,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="chat-input-area">
           <div class="chat-input-row">
             <textarea
@@ -986,7 +987,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- ── CASES VIEW ── -->
     <div class="view" id="view-cases">
       <div class="filter-bar">
@@ -1000,10 +1001,10 @@
         </select>
         <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="openNewCase()">+ New Case</button>
       </div>
- 
+
       <div class="cases-grid" id="cases-grid"></div>
     </div>
- 
+
     <!-- ── DOCUMENTS VIEW ── -->
     <div class="view" id="view-documents">
       <div class="doc-layout">
@@ -1021,7 +1022,7 @@
               </div>
             </div>
           </div>
- 
+
           <div class="panel">
             <div class="panel-header"><div class="panel-title">Employee Details</div></div>
             <div class="panel-body">
@@ -1047,7 +1048,7 @@
             </div>
           </div>
         </div>
- 
+
         <div class="panel">
           <div class="panel-header">
             <div class="panel-title">Document Preview</div>
@@ -1064,7 +1065,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- ── POLICIES VIEW ── -->
     <div class="view" id="view-policies">
       <div class="policy-upload-zone" id="upload-zone"
@@ -1077,33 +1078,33 @@
         <div class="policy-upload-hint">PDF or text file · drag & drop or click to browse</div>
       </div>
       <input type="file" id="policy-file-input" accept=".pdf,.txt,.doc,.docx" style="display:none" onchange="handlePolicyUpload(this.files)" />
- 
+
       <div class="section-title">Uploaded Policies <div class="section-title-line"></div></div>
       <div class="policy-list" id="policy-list"></div>
     </div>
- 
+
     <!-- ── LEGAL VIEW ── -->
     <div class="view" id="view-legal">
       <div class="legal-categories" id="legal-categories"></div>
       <div class="section-title" id="legal-refs-title">All References <div class="section-title-line"></div></div>
       <div class="legal-refs" id="legal-refs"></div>
     </div>
- 
+
   </div><!-- /content -->
 </div><!-- /main -->
- 
+
 <div id="toast"></div>
- 
+
 <script>
 const API = 'https://hr-guidance-api.replit.app';
- 
+
 // ─── Navigation ───────────────────────────────────────────────────────────────
 let currentView = 'dashboard';
 let currentMode = 'guidance';
 let selectedDocType = 'pip';
 let selectedLegalCat = 'all';
 let generatedDocText = '';
- 
+
 function navigate(view, btn) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1121,7 +1122,7 @@ function navigate(view, btn) {
   document.getElementById('topbar-title').textContent = titles[view] || view;
   closeSidebar();
 }
- 
+
 // ─── Mobile sidebar ───────────────────────────────────────────────────────────
 function openSidebar() {
   document.getElementById('sidebar').classList.add('open');
@@ -1131,7 +1132,7 @@ function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('overlay').style.display = 'none';
 }
- 
+
 // ─── Toast ────────────────────────────────────────────────────────────────────
 function showToast(msg, type='') {
   const t = document.getElementById('toast');
@@ -1139,10 +1140,10 @@ function showToast(msg, type='') {
   t.className = 'show ' + type;
   setTimeout(() => t.className = '', 3000);
 }
- 
+
 // ─── Chat ─────────────────────────────────────────────────────────────────────
 let chatHistory = [];
- 
+
 function setChatMode(mode, btn) {
   currentMode = mode;
   document.querySelectorAll('.chat-mode-btn').forEach(b => b.classList.remove('active'));
@@ -1152,21 +1153,21 @@ function setChatMode(mode, btn) {
   const row = document.getElementById('prompt-chips');
   row.innerHTML = (chips[mode]||chips.guidance).map(c => `<span class="tag-chip" onclick="useChip(this)">${c}</span>`).join('');
 }
- 
+
 function useChip(el) {
   document.getElementById('chat-input').value = el.textContent;
   sendChat();
 }
- 
+
 function handleChatKey(e) {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
 }
- 
+
 function autoResize(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
- 
+
 function appendMsg(role, html) {
   const msgs = document.getElementById('chat-messages');
   const div = document.createElement('div');
@@ -1178,7 +1179,7 @@ function appendMsg(role, html) {
   msgs.scrollTop = msgs.scrollHeight;
   return div;
 }
- 
+
 function appendTyping() {
   const msgs = document.getElementById('chat-messages');
   const div = document.createElement('div');
@@ -1188,30 +1189,30 @@ function appendTyping() {
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
 }
- 
+
 async function sendChat() {
   const input = document.getElementById('chat-input');
   const text = input.value.trim();
   if (!text) return;
   input.value = '';
   input.style.height = 'auto';
- 
+
   appendMsg('user', `<p>${text.replace(/</g,'&lt;')}</p>`);
   chatHistory.push({ role: 'user', content: text });
   appendTyping();
- 
+
   try {
     let endpoint = '/api/hr/ask';
     let body = { question: text, context: currentMode, conversationHistory: chatHistory.slice(-10) };
- 
+
     const res = await fetch(API + endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
- 
+
     document.getElementById('typing-indicator')?.remove();
- 
+
     if (!res.ok) throw new Error('API error ' + res.status);
     const data = await res.json();
     const answer = data.answer || data.guidance || data.response || data.message || 'No response received.';
@@ -1223,7 +1224,7 @@ async function sendChat() {
     appendMsg('ai', `<p>I'm having trouble connecting to the HR API right now. Please check that <code>https://hr-guidance-api.replit.app</code> is running.</p><p>Error: ${err.message}</p>`);
   }
 }
- 
+
 // ─── Cases ────────────────────────────────────────────────────────────────────
 const DEMO_CASES = [
   { id:'HR-2024-041', title:'Workplace Harassment Complaint', desc:'Employee reports repeated inappropriate comments from a colleague in the engineering department.', status:'urgent', category:'Harassment', date:'Mar 14', priority:'red' },
@@ -1233,9 +1234,9 @@ const DEMO_CASES = [
   { id:'HR-2024-037', title:'Wage Dispute', desc:'Hourly employee disputes overtime calculations for Q4. Payroll review requested.', status:'open', category:'Compensation', date:'Mar 7', priority:'amber' },
   { id:'HR-2024-035', title:'Exit Interview — R. Chen', desc:'Voluntary resignation. Exit interview completed. Offboarding in progress.', status:'closed', category:'Offboarding', date:'Mar 1', priority:'gray' },
 ];
- 
+
 let allCases = [...DEMO_CASES];
- 
+
 function renderCases(cases) {
   const grid = document.getElementById('cases-grid');
   if (!cases.length) { grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="empty-state-icon">◫</div><div class="empty-state-text">No cases found</div></div>`; return; }
@@ -1257,17 +1258,17 @@ function renderCases(cases) {
     </div>
   `).join('');
 }
- 
+
 function filterCases(q) {
   const filtered = allCases.filter(c => c.title.toLowerCase().includes(q.toLowerCase()) || c.desc.toLowerCase().includes(q.toLowerCase()) || c.id.toLowerCase().includes(q.toLowerCase()));
   renderCases(filtered);
 }
- 
+
 function filterCaseStatus(status) {
   const filtered = status === 'all' ? allCases : allCases.filter(c => c.status === status);
   renderCases(filtered);
 }
- 
+
 function openNewCase() {
   navigate('ask', null);
   setTimeout(() => {
@@ -1275,7 +1276,7 @@ function openNewCase() {
     document.getElementById('chat-input').focus();
   }, 200);
 }
- 
+
 async function loadCases() {
   try {
     const res = await fetch(API + '/api/hr/cases');
@@ -1289,38 +1290,38 @@ async function loadCases() {
   } catch(e) {}
   renderCases(allCases);
 }
- 
+
 // ─── Documents ────────────────────────────────────────────────────────────────
 const DOC_TYPES = { pip:'Performance Improvement Plan', warning:'Written Warning', termination:'Termination Letter', offer:'Offer Letter', accommodation:'Reasonable Accommodation Letter', policy:'Policy Notice' };
- 
+
 function selectDocType(type, btn) {
   selectedDocType = type;
   document.querySelectorAll('.doc-template-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
- 
+
 async function generateDocument() {
   const employee = document.getElementById('doc-employee').value.trim();
   const position = document.getElementById('doc-position').value.trim();
   const dept = document.getElementById('doc-dept').value.trim();
   const context = document.getElementById('doc-context').value.trim();
- 
+
   if (!employee) { showToast('Please enter an employee name', 'error'); return; }
- 
+
   const btn = document.getElementById('doc-btn-content');
   btn.innerHTML = '<span class="spinner"></span> Generating...';
- 
+
   const preview = document.getElementById('doc-preview');
   preview.className = 'doc-preview';
   preview.textContent = 'Generating document...';
- 
+
   try {
     const res = await fetch(API + '/api/hr/document', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ documentType: selectedDocType, employeeName: employee, position, department: dept, context, documentTitle: DOC_TYPES[selectedDocType] })
     });
- 
+
     if (!res.ok) throw new Error('API error ' + res.status);
     const data = await res.json();
     generatedDocText = data.document || data.content || data.text || JSON.stringify(data, null, 2);
@@ -1334,7 +1335,7 @@ async function generateDocument() {
     btn.innerHTML = '✦ Generate Document';
   }
 }
- 
+
 function generateFallbackDoc(type, name, position, dept, context) {
   const date = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
   const templates = {
@@ -1343,12 +1344,12 @@ function generateFallbackDoc(type, name, position, dept, context) {
   };
   return templates[type] || `[${DOC_TYPES[type]||type}]\n\nDate: ${date}\nEmployee: ${name}\nPosition: ${position}\nDepartment: ${dept}\n\n${context || 'Document content will appear here.'}`;
 }
- 
+
 function copyDoc() {
   if (!generatedDocText) { showToast('Nothing to copy yet', ''); return; }
   navigator.clipboard.writeText(generatedDocText).then(() => showToast('Copied to clipboard', 'success'));
 }
- 
+
 function downloadDoc() {
   if (!generatedDocText) { showToast('Nothing to download yet', ''); return; }
   const blob = new Blob([generatedDocText], { type: 'text/plain' });
@@ -1358,7 +1359,7 @@ function downloadDoc() {
   a.click();
   showToast('Document downloaded', 'success');
 }
- 
+
 // ─── Policies ─────────────────────────────────────────────────────────────────
 const DEMO_POLICIES = [
   { name:'Employee Code of Conduct', size:'245 KB', date:'Mar 10, 2024', type:'pdf' },
@@ -1366,7 +1367,7 @@ const DEMO_POLICIES = [
   { name:'Anti-Harassment Policy', size:'89 KB', date:'Feb 28, 2024', type:'pdf' },
   { name:'PTO & Leave Policy', size:'156 KB', date:'Feb 15, 2024', type:'pdf' },
 ];
- 
+
 function renderPolicies(policies) {
   document.getElementById('policy-list').innerHTML = policies.map(p => `
     <div class="policy-item">
@@ -1382,7 +1383,7 @@ function renderPolicies(policies) {
     </div>
   `).join('');
 }
- 
+
 function askAboutPolicy(name) {
   navigate('ask', null);
   setTimeout(() => {
@@ -1390,20 +1391,20 @@ function askAboutPolicy(name) {
     document.getElementById('chat-input').focus();
   }, 200);
 }
- 
+
 function handlePolicyUpload(files) {
   if (!files || !files.length) return;
   const file = files[0];
   uploadPolicy(file);
 }
- 
+
 function handlePolicyDrop(e) {
   e.preventDefault();
   document.getElementById('upload-zone').classList.remove('drag-over');
   const file = e.dataTransfer.files[0];
   if (file) uploadPolicy(file);
 }
- 
+
 async function uploadPolicy(file) {
   showToast('Uploading policy...', '');
   try {
@@ -1424,7 +1425,7 @@ async function uploadPolicy(file) {
     showToast('Saved locally (API unreachable)', '');
   }
 }
- 
+
 // ─── Legal ────────────────────────────────────────────────────────────────────
 const LEGAL_CATEGORIES = [
   { id:'harassment', icon:'🚫', title:'Anti-Discrimination', count: 12 },
@@ -1434,7 +1435,7 @@ const LEGAL_CATEGORIES = [
   { id:'termination', icon:'📋', title:'Termination', count: 7 },
   { id:'ada', icon:'♿', title:'ADA / Accessibility', count: 9 },
 ];
- 
+
 const LEGAL_REFS = [
   { title:'Title VII of the Civil Rights Act', excerpt:'Prohibits employment discrimination based on race, color, religion, sex, or national origin. Applies to employers with 15+ employees.', source:'42 U.S.C. § 2000e', jurisdiction:'Federal', category:'harassment' },
   { title:'Americans with Disabilities Act (ADA)', excerpt:'Requires employers to provide reasonable accommodations to qualified individuals with disabilities and prohibits disability-based discrimination.', source:'42 U.S.C. § 12101', jurisdiction:'Federal', category:'ada' },
@@ -1445,7 +1446,7 @@ const LEGAL_REFS = [
   { title:'Equal Pay Act', excerpt:'Requires that men and women in the same workplace be given equal pay for equal work. Jobs do not need to be identical but must be substantially equal.', source:'29 U.S.C. § 206(d)', jurisdiction:'Federal', category:'wage' },
   { title:'National Labor Relations Act', excerpt:'Protects employees right to organize, bargain collectively, and engage in concerted activity. Prohibits unfair labor practices by employers.', source:'29 U.S.C. § 151', jurisdiction:'Federal', category:'harassment' },
 ];
- 
+
 function renderLegalCategories() {
   document.getElementById('legal-categories').innerHTML = LEGAL_CATEGORIES.map(c => `
     <button class="legal-category-btn ${selectedLegalCat===c.id?'active':''}" onclick="filterLegal('${c.id}', this)">
@@ -1455,7 +1456,7 @@ function renderLegalCategories() {
     </button>
   `).join('');
 }
- 
+
 function renderLegalRefs(refs) {
   document.getElementById('legal-refs').innerHTML = refs.map(r => `
     <div class="legal-ref">
@@ -1469,7 +1470,7 @@ function renderLegalRefs(refs) {
     </div>
   `).join('');
 }
- 
+
 function filterLegal(cat, btn) {
   selectedLegalCat = selectedLegalCat === cat ? 'all' : cat;
   renderLegalCategories();
@@ -1478,7 +1479,7 @@ function filterLegal(cat, btn) {
   const catLabel = selectedLegalCat === 'all' ? 'All References' : LEGAL_CATEGORIES.find(c=>c.id===selectedLegalCat)?.title || 'References';
   document.getElementById('legal-refs-title').innerHTML = `${catLabel} <div class="section-title-line"></div>`;
 }
- 
+
 function askLegal(title) {
   navigate('ask', null);
   setChatMode('legal', document.querySelectorAll('.chat-mode-btn')[1]);
@@ -1487,7 +1488,7 @@ function askLegal(title) {
     document.getElementById('chat-input').focus();
   }, 200);
 }
- 
+
 // ─── Init ─────────────────────────────────────────────────────────────────────
 renderCases(DEMO_CASES);
 renderPolicies(DEMO_POLICIES);
@@ -1497,4 +1498,3 @@ loadCases();
 </script>
 </body>
 </html>
- 
